@@ -11,4 +11,10 @@ class TestController extends Controller
         echo __METHOD__;
         echo date('Y-m-d H:i:s');
     }
+    //测试redis
+    public function redis(){
+        $key='name1';
+        $value=Redis::get($key);
+        echo $key.':'.$value;
+    }
 }

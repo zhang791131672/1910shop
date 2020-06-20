@@ -17,6 +17,10 @@ Route::get('/', function () {
 Route::get('/info',function(){
    phpinfo();
 });
-Route::get('/test/redis','Goods\GoodsController@redis');
+Route::get('/test/redis','TestController@redis');
 Route::get('/test/hello','TestController@hello');
 Route::get('/goods/detail','Goods\GoodsController@detail');
+//商品信息
+Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
+//用户注册
+Route::post('/api/user/reg','User@UserController@reg');

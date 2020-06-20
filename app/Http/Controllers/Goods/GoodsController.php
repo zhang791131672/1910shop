@@ -17,9 +17,12 @@ class GoodsController extends Controller
         echo "<pre>";var_dump($goods_info);echo "</pre>";
        // dd($goods_info);
     }
-    public function redis(){
-        $key='name1';
-        $value=Redis::get($key);
-        echo $key.':'.$value;
+    //商品详情
+    public function goodsInfo(){
+        $goods_id=$_GET['id'];
+        $goods_info=GoodsModel::where('goods_id',$goods_id)->first();
+        if($goods_info){
+            return json_encode(['data'=>$goods_info]);
+        }
     }
 }
