@@ -22,7 +22,7 @@ class GoodsController extends Controller
         $goods_id=$_GET['id'];
         $goods_info=GoodsModel::where('goods_id',$goods_id)->first();
         if($goods_info){
-            return json_encode(['data'=>$goods_info]);
+            return json_encode($goods_info);
         }
     }
 }
