@@ -23,4 +23,4 @@ Route::get('/goods/detail','Goods\GoodsController@detail');
 //商品信息
 Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
 //用户注册
-Route::post('/api/user/reg','User@UserController@reg');
+Route::post('/api/user/reg','User\UserController@reg');
