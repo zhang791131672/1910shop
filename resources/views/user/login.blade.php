@@ -6,6 +6,7 @@
 </head>
 <body>
     <form action="{{url('/user/login')}}" method="post">
+        @csrf
         用户名: <input type="text" name="user_name" placeholder="用户名/Email"><br/>
         密码: <input type="password" name="password"><br/>
         <input type="submit" value="登录">
