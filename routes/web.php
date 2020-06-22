@@ -25,8 +25,10 @@ Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
 //前台用户注册
 Route::get('user/reg','User\UserController@reg');
 //后台用户注册
-Route::post('user/regDo','User\UserController@regDo');
+Route::post('user/reg','User\UserController@regDo');
 //前台用户登录
 Route::get('user/login','User\UserController@login');
 //后台用户登录
-Route::post('user/loginDo','User\UserController@loginDo');
+Route::post('user/login','User\UserController@loginDo');
+//个人中心
+Route::get('user/center','User\UserController@center');
