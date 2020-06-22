@@ -7,18 +7,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //用户注册
+    //前台用户注册
     public function reg(){
-        $name=$_POST['name'];
-        $email=$_POST['email'];
-        $pass1=$_POST['pass1'];
-        $pass2=$_POST['pass2'];
-        $arr=[
-            'name'=>$name,
-            'email'=>$email,
-            'pass1'=>$pass1,
-            'pass2'=>$pass2
-        ];
-        return json_encode($arr);
+        return view('user.reg');
+    }
+    //后台用户注册
+    public function regDo(Request $request){
+        dd($request->all());
+    }
+    //前台用户登录
+    public function login(){
+        return view('user.login');
+    }
+    //后台用户登录
+    public function loginDo(){
+
     }
 }

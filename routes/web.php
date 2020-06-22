@@ -22,5 +22,11 @@ Route::get('/test/hello','TestController@hello');
 Route::get('/goods/detail','Goods\GoodsController@detail');
 //商品信息
 Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
-//用户注册
-Route::post('/api/user/reg','User\UserController@reg');
+//前台用户注册
+Route::get('user/reg','User\UserController@reg');
+//后台用户注册
+Route::post('user/regDo','User\UserController@regDo');
+//前台用户登录
+Route::get('user/login','User\UserController@login');
+//后台用户登录
+Route::post('user/loginDo','User\UserController@loginDo');
