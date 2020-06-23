@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
+use Illuminate\Support\Facades\Cookie;
 class UserController extends Controller
 {
     //前台用户注册
@@ -64,8 +65,10 @@ class UserController extends Controller
         }else{
             $res=password_verify($password,$user_name_info->password);
             if($res){
-                setcookie('user_id',$user_name_info->user_id,time()+3600);
-                setcookie('user_name',$user_name_info->user_name,time()+3600);
+//                setcookie('user_id',$user_name_info->user_id,time()+3600);
+//                setcookie('user_name',$user_name_info->user_name,time()+3600);
+                Cookie::queue('user_id',$user_name_info->user_id,3600);
+                Cookie::queue('user_name',$user_name_info->user_name,3600);
                 header('refresh:2,url=/user/center');
                 echo "登录成功";
             }else{
@@ -76,8 +79,15 @@ class UserController extends Controller
     }
     //个人中心
     public function center(){
-        //echo "<pre>";print_r($_COOKIE);echo "</pre>";
-        if(isset($_COOKIE['user_id'])&&isset($_COOKIE['user_name'])){
+//        echo "<pre>";print_r($_COOKIE);echo "</pre>";die;
+//        原生
+//        if(isset($_COOKIE['user_id'])&&isset($_COOKIE['user_name'])){
+//            return view('user.center');
+//        }else{
+//            header('refresh:2,url=/user/login');
+//        }
+//      laravel框架使用
+        if(Cookie::has('user_id')&&Cookie::has('user_name')){
             return view('user.center');
         }else{
             header('refresh:2,url=/user/login');

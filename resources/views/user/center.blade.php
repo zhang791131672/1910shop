@@ -6,6 +6,6 @@
 </head>
 <body>
     个人中心<br/>
-    {{$_COOKIE['user_name']}},欢迎回来
+    {{Cookie::get('user_name')}},欢迎回来
 </body>
 </html>
