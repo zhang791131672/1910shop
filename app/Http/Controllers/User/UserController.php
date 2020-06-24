@@ -88,7 +88,9 @@ class UserController extends Controller
 //        }
 //      laravel框架使用
         if(Cookie::has('user_id')&&Cookie::has('user_name')){
-            return view('user.center');
+            $user_id=Cookie::get('user_id');
+            $user_info=UserModel::where('user_id',$user_id)->first();
+            return view('user.center',['user_info'=>$user_info]);
         }else{
             header('refresh:2,url=/user/login');
         }

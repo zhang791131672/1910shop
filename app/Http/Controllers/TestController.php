@@ -17,4 +17,11 @@ class TestController extends Controller
         $value=Redis::get($key);
         echo $key.':'.$value;
     }
+    public function http(){
+        $data=[
+            'name'=>'张三',
+            'age'=>18
+        ];
+        return $data;
+    }
 }
