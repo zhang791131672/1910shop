@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Http\Request;
 use App\Model\UserModel;
 use App\Model\TokenModel;
+use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
     /**
@@ -88,10 +88,15 @@ class UserController extends Controller
             if($res){
                 $str=$user_name_info->user_id.$user_name_info->user_name.time().uniqid();
                 $token=md5($str);
+                /* 数据库存储token令牌
                 $token_model=new TokenModel();
                 $token_model->user_id=$user_name_info->user_id;
                 $token_model->token=$token;
                 $token_model->save();
+                */
+                //Redis以token令牌为键以用户id为值存储
+                Redis::set($token,$user_name_info->user_id);
+                Redis::expire($token,10);
                     $response=[
                         'error'=>0,
                         'msg'=>'登录成功',
@@ -111,9 +116,12 @@ class UserController extends Controller
      */
     public function center(Request $request){
         $token=$_GET['token'];
+        /*数据库取token令牌
         $res=TokenModel::where('token',$token)->first();
-        if($res){
-            $user_id=$res->user_id;
+        */
+        //Redis取token键的用户id值
+        $user_id=Redis::get($token);
+        if($user_id){
             $user_info=UserModel::where('user_id',$user_id)->value('user_name');
             echo '欢迎'.$user_info.'来到个人中心';die;
         }else{
