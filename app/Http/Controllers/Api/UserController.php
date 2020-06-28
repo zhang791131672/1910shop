@@ -96,7 +96,7 @@ class UserController extends Controller
                 */
                 //Redis以token令牌为键以用户id为值存储
                 Redis::set($token,$user_name_info->user_id);
-                Redis::expire($token,10);
+                Redis::expire($token,7200);
                     $response=[
                         'error'=>0,
                         'msg'=>'登录成功',
@@ -115,21 +115,43 @@ class UserController extends Controller
      * 个人中心
      */
     public function center(Request $request){
-        $token=$_GET['token'];
+        $token=$request->get('token');
         /*数据库取token令牌
         $res=TokenModel::where('token',$token)->first();
         */
         //Redis取token键的用户id值
         $user_id=Redis::get($token);
-        if($user_id){
-            $user_info=UserModel::where('user_id',$user_id)->value('user_name');
-            echo '欢迎'.$user_info.'来到个人中心';die;
-        }else{
-            $response=[
-                'error'=>50008,
-                'msg'=>'请登录'
-            ];
-        }
+        $user_info=UserModel::where('user_id',$user_id)->value('user_name');
+        echo '欢迎'.$user_info.'来到个人中心';die;
+    }
+    /**
+     * 订单
+     */
+    public function order(Request $request){
+        $arr=[
+            '200006281112',
+            '200006281113'
+        ];
+        $response=[
+            'errno'=>0,
+            'msg'=>'ok',
+            'data'=>$arr
+        ];
+        return $response;
+    }
+    /**
+     * 购物车
+     */
+    public function cart(Request $request){
+        $arr=[
+            '男士夏季短裤',
+            '黑色T恤'
+        ];
+        $response=[
+            'errno'=>0,
+            'msg'=>'ok',
+            'data'=>$arr
+        ];
         return $response;
     }
 }

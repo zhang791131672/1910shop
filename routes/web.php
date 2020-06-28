@@ -44,6 +44,13 @@ Route::group(['namespace'=>'Api'],function(){
     Route::post('/api/user/reg','UserController@regDo');
     //登录接口
     Route::post('/api/user/login','UserController@loginDo');
+});
+
+Route::group(['namespace'=>'Api','middleware'=>['check.pri']],function(){
     //个人中心接口
     Route::get('/api/user/center','UserController@center');
+    //订单
+    Route::get('/api/user/order','UserController@order');
+    //购物车
+    Route::get('/api/user/cart','UserController@cart');
 });
