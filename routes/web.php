@@ -45,7 +45,7 @@ Route::group(['namespace'=>'Api'],function(){
     //登录接口
     Route::post('/api/user/login','UserController@loginDo');
 });
-
+//接口鉴权
 Route::group(['namespace'=>'Api','middleware'=>['check.pri']],function(){
     //个人中心接口
     Route::get('/api/user/center','UserController@center');
@@ -53,4 +53,9 @@ Route::group(['namespace'=>'Api','middleware'=>['check.pri']],function(){
     Route::get('/api/user/order','UserController@order');
     //购物车
     Route::get('/api/user/cart','UserController@cart');
+});
+//接口鉴权+接口防刷
+Route::group(['namespace'=>'Api','middleware'=>['check.pri','access.filter']],function(){
+    Route::get('/api/a','TestController@a');
+    Route::get('/api/b','TestController@b');
 });
