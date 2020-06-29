@@ -23,6 +23,8 @@ Route::get('/test/hello','TestController@hello');
 Route::get('/goods/detail','Goods\GoodsController@detail');
 //商品信息
 Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
+Route::get('/sign','TestController@sign');
+Route::get('/secret','TestController@secret');
 
 //mvc模式
 Route::group(['namespace'=>'User'],function(){
