@@ -25,6 +25,10 @@ Route::get('/goods/detail','Goods\GoodsController@detail');
 Route::get('/api/goods/info','Goods\GoodsController@goodsInfo');
 Route::get('/sign','TestController@sign');
 Route::get('/secret','TestController@secret');
+Route::get('/test/www','TestController@www');
+Route::get('/test/postData','TestController@postData');
+Route::get('/test/encrypt','TestController@encrypt');
+Route::get('/test/rsa/encrypt','TestController@rsaEncrypt');
 
 //mvc模式
 Route::group(['namespace'=>'User'],function(){
